@@ -21,8 +21,8 @@ func QMakeFromElems(result *Quat, x, y, z, w float32) {
 }
 
 func QMakeFromV3Scalar(result *Quat, xyz *Vector3, w float32) {
-	QSetXYZ(result, xyz)
-	QSetW(result, w)
+	result.SetXYZ(xyz)
+	result.SetW(w)
 }
 
 func QMakeFromV4(result *Quat, vec *Vector4) {
@@ -81,67 +81,67 @@ func QSquad(result *Quat, t float32, unitQuat0, unitQuat1, unitQuat2, unitQuat3 
 	QSlerp(result, (2.0*t)*(1.0-t), &tmp0, &tmp1)
 }
 
-func QSetXYZ(result *Quat, vec *Vector3) {
-	result.x = vec.x
-	result.y = vec.y
-	result.z = vec.z
+func (q *Quat) SetXYZ(vec *Vector3) {
+	q.x = vec.x
+	q.y = vec.y
+	q.z = vec.z
 }
 
-func QSetX(result *Quat, x float32) {
-	result.x = x
+func (q *Quat) SetX(x float32) {
+	q.x = x
 }
 
-func QGetX(quat *Quat) float32 {
-	return quat.x
+func (q *Quat) X() float32 {
+	return q.x
 }
 
-func QSetY(result *Quat, y float32) {
-	result.y = y
+func (q *Quat) SetY(y float32) {
+	q.y = y
 }
 
-func QGetY(quat *Quat) float32 {
-	return quat.y
+func (q *Quat) Y() float32 {
+	return q.y
 }
 
-func QSetZ(result *Quat, z float32) {
-	result.z = z
+func (q *Quat) SetZ(z float32) {
+	q.z = z
 }
 
-func QGetZ(quat *Quat) float32 {
-	return quat.z
+func (q *Quat) Z() float32 {
+	return q.z
 }
 
-func QSetW(result *Quat, w float32) {
-	result.w = w
+func (q *Quat) SetW(w float32) {
+	q.w = w
 }
 
-func QGetW(quat *Quat) float32 {
-	return quat.w
+func (q *Quat) W() float32 {
+	return q.w
 }
 
-func QSetElem(result *Quat, index int, value float32) {
+func (q *Quat) SetElem(index int, value float32) {
 	switch index {
 	case 0:
-		result.x = value
+		q.x = value
 	case 1:
-		result.y = value
+		q.y = value
 	case 2:
-		result.z = value
+		q.z = value
 	case 3:
-		result.w = value
+		q.w = value
 	}
 }
 
-func QGetElem(quat *Quat, index int) float32 {
+func (q *Quat) GetElem(index int) float32 {
 	switch index {
 	case 0:
-		return quat.x
+		return q.x
 	case 1:
-		return quat.y
+		return q.y
 	case 2:
-		return quat.z
+		return q.z
 	case 3:
-		return quat.w
+		return q.w
 	}
 	return 0
 }
@@ -189,20 +189,28 @@ func QDot(quat0, quat1 *Quat) float32 {
 	return result
 }
 
-func QNorm(quat *Quat) float32 {
-	result := quat.x * quat.x
-	result += quat.y * quat.y
-	result += quat.z * quat.z
-	result += quat.w * quat.w
+func (q *Quat) Dot(quat1 *Quat) float32 {
+	result := q.x * quat1.x
+	result += q.y * quat1.y
+	result += q.z * quat1.z
+	result += q.w * quat1.w
 	return result
 }
 
-func QLength(quat *Quat) float32 {
-	return sqrt(QNorm(quat))
+func (q *Quat) Norm() float32 {
+	result := q.x * q.x
+	result += q.y * q.y
+	result += q.z * q.z
+	result += q.w * q.w
+	return result
+}
+
+func (q *Quat) Length() float32 {
+	return sqrt(q.Norm())
 }
 
 func QNormalize(result, quat *Quat) {
-	lenSqr := QNorm(quat)
+	lenSqr := quat.Norm()
 	lenInv := 1.0 / sqrt(lenSqr)
 	result.x = quat.x * lenInv
 	result.y = quat.y * lenInv
@@ -285,6 +293,6 @@ func QSelect(result, quat0, quat1 *Quat, select1 int) {
 	}
 }
 
-func (quat *Quat) String() string {
-	return fmt.Sprintf("( %f %f %f %f )\n", quat.x, quat.y, quat.z, quat.w)
+func (q *Quat) String() string {
+	return fmt.Sprintf("( %f %f %f %f )\n", q.x, q.y, q.z, q.w)
 }

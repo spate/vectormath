@@ -46,46 +46,46 @@ func M3MakeFromCols(result *Matrix3, col0, col1, col2 *Vector3) {
 	V3Copy(&result.col2, col2)
 }
 
-func M3SetCol0(result *Matrix3, col0 *Vector3) {
-	V3Copy(&result.col0, col0)
+func (m *Matrix3) SetCol0(col0 *Vector3) {
+	V3Copy(&m.col0, col0)
 }
 
-func M3SetCol1(result *Matrix3, col1 *Vector3) {
-	V3Copy(&result.col1, col1)
+func (m *Matrix3) SetCol1(col1 *Vector3) {
+	V3Copy(&m.col1, col1)
 }
 
-func M3SetCol2(result *Matrix3, col2 *Vector3) {
-	V3Copy(&result.col2, col2)
+func (m *Matrix3) SetCol2(col2 *Vector3) {
+	V3Copy(&m.col2, col2)
 }
 
-func M3SetCol(result *Matrix3, col int, vec *Vector3) {
+func (m *Matrix3) SetCol(col int, vec *Vector3) {
 	switch col {
 	case 0:
-		V3Copy(&result.col0, vec)
+		V3Copy(&m.col0, vec)
 	case 1:
-		V3Copy(&result.col1, vec)
+		V3Copy(&m.col1, vec)
 	case 2:
-		V3Copy(&result.col2, vec)
+		V3Copy(&m.col2, vec)
 	}
 }
 
-func M3SetRow(result *Matrix3, row int, vec *Vector3) {
-	V3SetElem(&result.col0, row, V3GetElem(vec, 0))
-	V3SetElem(&result.col1, row, V3GetElem(vec, 1))
-	V3SetElem(&result.col2, row, V3GetElem(vec, 2))
+func (m *Matrix3) SetRow(row int, vec *Vector3) {
+	m.col0.SetElem(row, vec.GetElem(0))
+	m.col1.SetElem(row, vec.GetElem(1))
+	m.col2.SetElem(row, vec.GetElem(2))
 }
 
-func M3SetElem(result *Matrix3, col, row int, val float32) {
+func (m *Matrix3) SetElem(col, row int, val float32) {
 	var tmpV3_0 Vector3
-	M3GetCol(&tmpV3_0, result, col)
-	V3SetElem(&tmpV3_0, row, val)
-	M3SetCol(result, col, &tmpV3_0)
+	M3GetCol(&tmpV3_0, m, col)
+	tmpV3_0.SetElem(row, val)
+	m.SetCol(col, &tmpV3_0)
 }
 
-func M3GetElem(mat *Matrix3, col, row int) float32 {
+func (m *Matrix3) GetElem(col, row int) float32 {
 	var tmpV3_0 Vector3
-	M3GetCol(&tmpV3_0, mat, col)
-	return V3GetElem(&tmpV3_0, row)
+	M3GetCol(&tmpV3_0, m, col)
+	return tmpV3_0.GetElem(row)
 }
 
 func M3GetCol0(result *Vector3, mat *Matrix3) {
@@ -112,9 +112,9 @@ func M3GetCol(result *Vector3, mat *Matrix3, col int) {
 }
 
 func M3GetRow(result *Vector3, mat *Matrix3, row int) {
-	x := V3GetElem(&mat.col0, row)
-	y := V3GetElem(&mat.col1, row)
-	z := V3GetElem(&mat.col2, row)
+	x := mat.col0.GetElem(row)
+	y := mat.col1.GetElem(row)
+	z := mat.col2.GetElem(row)
 	V3MakeFromElems(result, x, y, z)
 }
 
@@ -137,10 +137,10 @@ func M3Inverse(result, mat *Matrix3) {
 	V3MakeFromElems(&result.col2, tmp0.z*detinv, tmp1.z*detinv, tmp2.z*detinv)
 }
 
-func M3Determinant(mat *Matrix3) {
+func (m *Matrix3) Determinant() float32 {
 	var tmpV3_0 Vector3
-	V3Cross(&tmpV3_0, &mat.col0, &mat.col1)
-	V3Dot(&mat.col2, &tmpV3_0)
+	V3Cross(&tmpV3_0, &m.col0, &m.col1)
+	return V3Dot(&m.col2, &tmpV3_0)
 }
 
 func M3Add(result, mat0, mat1 *Matrix3) {
@@ -281,9 +281,9 @@ func M3Select(result, mat0, mat1 *Matrix3, select1 int) {
 	V3Select(&result.col2, &mat0.col2, &mat1.col2, select1)
 }
 
-func (mat *Matrix3) String() string {
+func (m *Matrix3) String() string {
 	var tmp Matrix3
-	M3Transpose(&tmp, mat)
+	M3Transpose(&tmp, m)
 	return tmp.col0.String() + tmp.col1.String() + tmp.col2.String()
 }
 
@@ -333,53 +333,53 @@ func M4MakeFromQV3(result *Matrix4, unitQuat *Quat, translateVec *Vector3) {
 	V4MakeFromV3Scalar(&result.col3, translateVec, 1.0)
 }
 
-func M4SetCol0(result *Matrix4, col0 *Vector4) {
-	V4Copy(&result.col0, col0)
+func (m *Matrix4) SetCol0(col0 *Vector4) {
+	V4Copy(&m.col0, col0)
 }
 
-func M4SetCol1(result *Matrix4, col1 *Vector4) {
-	V4Copy(&result.col1, col1)
+func (m *Matrix4) SetCol1(col1 *Vector4) {
+	V4Copy(&m.col1, col1)
 }
 
-func M4SetCol2(result *Matrix4, col2 *Vector4) {
-	V4Copy(&result.col2, col2)
+func (m *Matrix4) SetCol2(col2 *Vector4) {
+	V4Copy(&m.col2, col2)
 }
 
-func M4SetCol3(result *Matrix4, col3 *Vector4) {
-	V4Copy(&result.col3, col3)
+func (m *Matrix4) SetCol3(col3 *Vector4) {
+	V4Copy(&m.col3, col3)
 }
 
-func M4SetCol(result *Matrix4, col int, vec *Vector4) {
+func (m *Matrix4) SetCol(col int, vec *Vector4) {
 	switch col {
 	case 0:
-		V4Copy(&result.col0, vec)
+		V4Copy(&m.col0, vec)
 	case 1:
-		V4Copy(&result.col1, vec)
+		V4Copy(&m.col1, vec)
 	case 2:
-		V4Copy(&result.col2, vec)
+		V4Copy(&m.col2, vec)
 	case 3:
-		V4Copy(&result.col3, vec)
+		V4Copy(&m.col3, vec)
 	}
 }
 
-func M4SetRow(result *Matrix4, row int, vec *Vector4) {
-	V4SetElem(&result.col0, row, vec.x)
-	V4SetElem(&result.col1, row, vec.y)
-	V4SetElem(&result.col2, row, vec.z)
-	V4SetElem(&result.col3, row, vec.w)
+func (m *Matrix4) SetRow(row int, vec *Vector4) {
+	m.col0.SetElem(row, vec.x)
+	m.col1.SetElem(row, vec.y)
+	m.col2.SetElem(row, vec.z)
+	m.col3.SetElem(row, vec.w)
 }
 
-func M4SetElem(result *Matrix4, col, row int, val float32) {
+func (m *Matrix4) SetElem(col, row int, val float32) {
 	var tmpV3_0 Vector4
-	M4GetCol(&tmpV3_0, result, col)
-	V4SetElem(&tmpV3_0, row, val)
-	M4SetCol(result, col, &tmpV3_0)
+	M4GetCol(&tmpV3_0, m, col)
+	tmpV3_0.SetElem(row, val)
+	m.SetCol(col, &tmpV3_0)
 }
 
-func M4GetElem(mat *Matrix4, col, row int) float32 {
+func (m *Matrix4) GetElem(col, row int) float32 {
 	var tmpV4_0 Vector4
-	M4GetCol(&tmpV4_0, mat, col)
-	return V4GetElem(&tmpV4_0, row)
+	M4GetCol(&tmpV4_0, m, col)
+	return tmpV4_0.GetElem(row)
 }
 
 func M4GetCol0(result *Vector4, mat *Matrix4) {
@@ -412,7 +412,7 @@ func M4GetCol(result *Vector4, mat *Matrix4, col int) {
 }
 
 func M4GetRow(result *Vector4, mat *Matrix4, row int) {
-	V4MakeFromElems(result, V4GetElem(&mat.col0, row), V4GetElem(&mat.col1, row), V4GetElem(&mat.col2, row), V4GetElem(&mat.col3, row))
+	V4MakeFromElems(result, mat.col0.GetElem(row), mat.col1.GetElem(row), mat.col2.GetElem(row), mat.col3.GetElem(row))
 }
 
 func M4Transpose(result, mat *Matrix4) {
@@ -448,41 +448,41 @@ func M4Inverse(result, mat *Matrix4) {
 	tmp3 := ((mF * mO) - (mN * mG))
 	tmp4 := ((mJ * mD) - (mB * mL))
 	tmp5 := ((mN * mH) - (mF * mP))
-	V4SetX(&res0, (((mJ * tmp1) - (mL * tmp3)) - (mK * tmp5)))
-	V4SetY(&res0, (((mN * tmp0) - (mP * tmp2)) - (mO * tmp4)))
-	V4SetZ(&res0, (((mD * tmp3) + (mC * tmp5)) - (mB * tmp1)))
-	V4SetW(&res0, (((mH * tmp2) + (mG * tmp4)) - (mF * tmp0)))
+	res0.SetX(((mJ * tmp1) - (mL * tmp3)) - (mK * tmp5))
+	res0.SetY(((mN * tmp0) - (mP * tmp2)) - (mO * tmp4))
+	res0.SetZ(((mD * tmp3) + (mC * tmp5)) - (mB * tmp1))
+	res0.SetW(((mH * tmp2) + (mG * tmp4)) - (mF * tmp0))
 	detInv := (1.0 / ((((mA * res0.x) + (mE * res0.y)) + (mI * res0.z)) + (mM * res0.w)))
-	V4SetX(&res1, (mI * tmp1))
-	V4SetY(&res1, (mM * tmp0))
-	V4SetZ(&res1, (mA * tmp1))
-	V4SetW(&res1, (mE * tmp0))
-	V4SetX(&res3, (mI * tmp3))
-	V4SetY(&res3, (mM * tmp2))
-	V4SetZ(&res3, (mA * tmp3))
-	V4SetW(&res3, (mE * tmp2))
-	V4SetX(&res2, (mI * tmp5))
-	V4SetY(&res2, (mM * tmp4))
-	V4SetZ(&res2, (mA * tmp5))
-	V4SetW(&res2, (mE * tmp4))
+	res1.SetX(mI * tmp1)
+	res1.SetY(mM * tmp0)
+	res1.SetZ(mA * tmp1)
+	res1.SetW(mE * tmp0)
+	res3.SetX(mI * tmp3)
+	res3.SetY(mM * tmp2)
+	res3.SetZ(mA * tmp3)
+	res3.SetW(mE * tmp2)
+	res2.SetX(mI * tmp5)
+	res2.SetY(mM * tmp4)
+	res2.SetZ(mA * tmp5)
+	res2.SetW(mE * tmp4)
 	tmp0 = ((mI * mB) - (mA * mJ))
 	tmp1 = ((mM * mF) - (mE * mN))
 	tmp2 = ((mI * mD) - (mA * mL))
 	tmp3 = ((mM * mH) - (mE * mP))
 	tmp4 = ((mI * mC) - (mA * mK))
 	tmp5 = ((mM * mG) - (mE * mO))
-	V4SetX(&res2, (((mL * tmp1) - (mJ * tmp3)) + res2.x))
-	V4SetY(&res2, (((mP * tmp0) - (mN * tmp2)) + res2.y))
-	V4SetZ(&res2, (((mB * tmp3) - (mD * tmp1)) - res2.z))
-	V4SetW(&res2, (((mF * tmp2) - (mH * tmp0)) - res2.w))
-	V4SetX(&res3, (((mJ * tmp5) - (mK * tmp1)) + res3.x))
-	V4SetY(&res3, (((mN * tmp4) - (mO * tmp0)) + res3.y))
-	V4SetZ(&res3, (((mC * tmp1) - (mB * tmp5)) - res3.z))
-	V4SetW(&res3, (((mG * tmp0) - (mF * tmp4)) - res3.w))
-	V4SetX(&res1, (((mK * tmp3) - (mL * tmp5)) - res1.x))
-	V4SetY(&res1, (((mO * tmp2) - (mP * tmp4)) - res1.y))
-	V4SetZ(&res1, (((mD * tmp5) - (mC * tmp3)) + res1.z))
-	V4SetW(&res1, (((mH * tmp4) - (mG * tmp2)) + res1.w))
+	res2.SetX(((mL * tmp1) - (mJ * tmp3)) + res2.x)
+	res2.SetY(((mP * tmp0) - (mN * tmp2)) + res2.y)
+	res2.SetZ(((mB * tmp3) - (mD * tmp1)) - res2.z)
+	res2.SetW(((mF * tmp2) - (mH * tmp0)) - res2.w)
+	res3.SetX(((mJ * tmp5) - (mK * tmp1)) + res3.x)
+	res3.SetY(((mN * tmp4) - (mO * tmp0)) + res3.y)
+	res3.SetZ(((mC * tmp1) - (mB * tmp5)) - res3.z)
+	res3.SetW(((mG * tmp0) - (mF * tmp4)) - res3.w)
+	res1.SetX(((mK * tmp3) - (mL * tmp5)) - res1.x)
+	res1.SetY(((mO * tmp2) - (mP * tmp4)) - res1.y)
+	res1.SetZ(((mD * tmp5) - (mC * tmp3)) + res1.z)
+	res1.SetW(((mH * tmp4) - (mG * tmp2)) + res1.w)
 	V4ScalarMul(&result.col0, &res0, detInv)
 	V4ScalarMul(&result.col1, &res1, detInv)
 	V4ScalarMul(&result.col2, &res2, detInv)
@@ -493,13 +493,13 @@ func M4AffineInverse(result, mat *Matrix4) {
 	var affineMat, tmpT3_0 Transform3
 	var tmpV3_0, tmpV3_1, tmpV3_2, tmpV3_3 Vector3
 	V4GetXYZ(&tmpV3_0, &mat.col0)
-	T3SetCol0(&affineMat, &tmpV3_0)
 	V4GetXYZ(&tmpV3_1, &mat.col1)
-	T3SetCol1(&affineMat, &tmpV3_1)
 	V4GetXYZ(&tmpV3_2, &mat.col2)
-	T3SetCol2(&affineMat, &tmpV3_2)
 	V4GetXYZ(&tmpV3_3, &mat.col3)
-	T3SetCol3(&affineMat, &tmpV3_3)
+	affineMat.SetCol0(&tmpV3_0)
+	affineMat.SetCol1(&tmpV3_1)
+	affineMat.SetCol2(&tmpV3_2)
+	affineMat.SetCol3(&tmpV3_3)
 	T3Inverse(&tmpT3_0, &affineMat)
 	M4MakeFromT3(result, &tmpT3_0)
 }
@@ -508,34 +508,34 @@ func M4OrthoInverse(result, mat *Matrix4) {
 	var affineMat, tmpT3_0 Transform3
 	var tmpV3_0, tmpV3_1, tmpV3_2, tmpV3_3 Vector3
 	V4GetXYZ(&tmpV3_0, &mat.col0)
-	T3SetCol0(&affineMat, &tmpV3_0)
 	V4GetXYZ(&tmpV3_1, &mat.col1)
-	T3SetCol1(&affineMat, &tmpV3_1)
 	V4GetXYZ(&tmpV3_2, &mat.col2)
-	T3SetCol2(&affineMat, &tmpV3_2)
 	V4GetXYZ(&tmpV3_3, &mat.col3)
-	T3SetCol3(&affineMat, &tmpV3_3)
+	affineMat.SetCol0(&tmpV3_0)
+	affineMat.SetCol1(&tmpV3_1)
+	affineMat.SetCol2(&tmpV3_2)
+	affineMat.SetCol3(&tmpV3_3)
 	T3OrthoInverse(&tmpT3_0, &affineMat)
 	M4MakeFromT3(result, &tmpT3_0)
 }
 
-func M4Determinant(mat *Matrix4) float32 {
-	mA := mat.col0.x
-	mB := mat.col0.y
-	mC := mat.col0.z
-	mD := mat.col0.w
-	mE := mat.col1.x
-	mF := mat.col1.y
-	mG := mat.col1.z
-	mH := mat.col1.w
-	mI := mat.col2.x
-	mJ := mat.col2.y
-	mK := mat.col2.z
-	mL := mat.col2.w
-	mM := mat.col3.x
-	mN := mat.col3.y
-	mO := mat.col3.z
-	mP := mat.col3.w
+func (m *Matrix4) Determinant() float32 {
+	mA := m.col0.x
+	mB := m.col0.y
+	mC := m.col0.z
+	mD := m.col0.w
+	mE := m.col1.x
+	mF := m.col1.y
+	mG := m.col1.z
+	mH := m.col1.w
+	mI := m.col2.x
+	mJ := m.col2.y
+	mK := m.col2.z
+	mL := m.col2.w
+	mM := m.col3.x
+	mN := m.col3.y
+	mO := m.col3.z
+	mP := m.col3.w
 	tmp0 := ((mK * mD) - (mC * mL))
 	tmp1 := ((mO * mH) - (mG * mP))
 	tmp2 := ((mB * mK) - (mJ * mC))
@@ -640,10 +640,10 @@ func M4MakeIdentity(result *Matrix4) {
 	V4MakeWAxis(&result.col3)
 }
 
-func M4SetUpper3x3(result *Matrix4, mat3 *Matrix3) {
-	V4SetXYZ(&result.col0, &mat3.col0)
-	V4SetXYZ(&result.col1, &mat3.col1)
-	V4SetXYZ(&result.col2, &mat3.col2)
+func (m *Matrix4) SetUpper3x3(mat3 *Matrix3) {
+	m.col0.SetXYZ(&mat3.col0)
+	m.col0.SetXYZ(&mat3.col1)
+	m.col0.SetXYZ(&mat3.col2)
 }
 
 func M4GetUpper3x3(result *Matrix3, mat *Matrix4) {
@@ -652,8 +652,8 @@ func M4GetUpper3x3(result *Matrix3, mat *Matrix4) {
 	V4GetXYZ(&result.col2, &mat.col2)
 }
 
-func M4SetTranslation(result *Matrix4, translateVec *Vector3) {
-	V4SetXYZ(&result.col3, translateVec)
+func (m *Matrix4) SetTranslation(translateVec *Vector3) {
+	m.col3.SetXYZ(translateVec)
 }
 
 func M4GetTranslation(result *Vector3, mat *Matrix4) {
@@ -732,9 +732,9 @@ func M4MakeScale(result *Matrix4, scaleVec *Vector3) {
 }
 
 func M4AppendScale(result, mat *Matrix4, scaleVec *Vector3) {
-	V4ScalarMul(&result.col0, &mat.col0, V3GetX(scaleVec))
-	V4ScalarMul(&result.col1, &mat.col1, V3GetY(scaleVec))
-	V4ScalarMul(&result.col2, &mat.col2, V3GetZ(scaleVec))
+	V4ScalarMul(&result.col0, &mat.col0, scaleVec.X())
+	V4ScalarMul(&result.col1, &mat.col1, scaleVec.Y())
+	V4ScalarMul(&result.col2, &mat.col2, scaleVec.Z())
 	V4Copy(&result.col3, &mat.col3)
 }
 
@@ -815,9 +815,9 @@ func M4Select(result, mat0, mat1 *Matrix4, select1 int) {
 	V4Select(&result.col3, &mat0.col3, &mat1.col3, select1)
 }
 
-func (mat *Matrix4) String() string {
+func (m *Matrix4) String() string {
 	var tmp Matrix4
-	M4Transpose(&tmp, mat)
+	M4Transpose(&tmp, m)
 	return tmp.col0.String() + tmp.col1.String() + tmp.col2.String() + tmp.col3.String()
 }
 
@@ -845,64 +845,64 @@ func T3MakeFromCols(result *Transform3, col0, col1, col2, col3 *Vector3) {
 }
 
 func T3MakeFromM3V3(result *Transform3, tfrm *Matrix3, translateVec *Vector3) {
-	T3SetUpper3x3(result, tfrm)
-	T3SetTranslation(result, translateVec)
+	result.SetUpper3x3(tfrm)
+	result.SetTranslation(translateVec)
 }
 
 func T3MakeFromQV3(result *Transform3, unitQuat *Quat, translateVec *Vector3) {
 	var tmpM3_0 Matrix3
 	M3MakeFromQ(&tmpM3_0, unitQuat)
-	T3SetUpper3x3(result, &tmpM3_0)
-	T3SetTranslation(result, translateVec)
+	result.SetUpper3x3(&tmpM3_0)
+	result.SetTranslation(translateVec)
 }
 
-func T3SetCol0(result *Transform3, col0 *Vector3) {
-	V3Copy(&result.col0, col0)
+func (t *Transform3) SetCol0(col0 *Vector3) {
+	V3Copy(&t.col0, col0)
 }
 
-func T3SetCol1(result *Transform3, col1 *Vector3) {
-	V3Copy(&result.col1, col1)
+func (t *Transform3) SetCol1(col1 *Vector3) {
+	V3Copy(&t.col1, col1)
 }
 
-func T3SetCol2(result *Transform3, col2 *Vector3) {
-	V3Copy(&result.col2, col2)
+func (t *Transform3) SetCol2(col2 *Vector3) {
+	V3Copy(&t.col2, col2)
 }
 
-func T3SetCol3(result *Transform3, col3 *Vector3) {
-	V3Copy(&result.col3, col3)
+func (t *Transform3) SetCol3(col3 *Vector3) {
+	V3Copy(&t.col3, col3)
 }
 
-func T3SetCol(result *Transform3, col int, vec *Vector3) {
+func (t *Transform3) SetCol(col int, vec *Vector3) {
 	switch col {
 	case 0:
-		V3Copy(&result.col0, vec)
+		V3Copy(&t.col0, vec)
 	case 1:
-		V3Copy(&result.col1, vec)
+		V3Copy(&t.col1, vec)
 	case 2:
-		V3Copy(&result.col2, vec)
+		V3Copy(&t.col2, vec)
 	case 3:
-		V3Copy(&result.col3, vec)
+		V3Copy(&t.col3, vec)
 	}
 }
 
-func T3SetRow(result *Transform3, row int, vec *Vector4) {
-	V3SetElem(&result.col0, row, V4GetElem(vec, 0))
-	V3SetElem(&result.col1, row, V4GetElem(vec, 1))
-	V3SetElem(&result.col2, row, V4GetElem(vec, 2))
-	V3SetElem(&result.col3, row, V4GetElem(vec, 3))
+func (t *Transform3) SetRow(row int, vec *Vector4) {
+	t.col0.SetElem(row, vec.GetElem(0))
+	t.col1.SetElem(row, vec.GetElem(1))
+	t.col2.SetElem(row, vec.GetElem(2))
+	t.col3.SetElem(row, vec.GetElem(3))
 }
 
-func T3SetElem(result *Transform3, col, row int, val float32) {
+func (t *Transform3) SetElem(col, row int, val float32) {
 	var tmpV3_0 Vector3
-	T3GetCol(&tmpV3_0, result, col)
-	V3SetElem(&tmpV3_0, row, val)
-	T3SetCol(result, col, &tmpV3_0)
+	T3GetCol(&tmpV3_0, t, col)
+	tmpV3_0.SetElem(row, val)
+	t.SetCol(col, &tmpV3_0)
 }
 
-func T3GetElem(tfrm *Transform3, col, row int) float32 {
+func (t *Transform3) GetElem(col, row int) float32 {
 	var tmpV3_0 Vector3
-	T3GetCol(&tmpV3_0, tfrm, col)
-	return V3GetElem(&tmpV3_0, row)
+	T3GetCol(&tmpV3_0, t, col)
+	return tmpV3_0.GetElem(row)
 }
 
 func T3GetCol0(result *Vector3, tfrm *Transform3) {
@@ -935,7 +935,7 @@ func T3GetCol(result *Vector3, tfrm *Transform3, col int) {
 }
 
 func T3GetRow(result *Vector4, tfrm *Transform3, row int) {
-	V4MakeFromElems(result, V3GetElem(&tfrm.col0, row), V3GetElem(&tfrm.col1, row), V3GetElem(&tfrm.col2, row), V3GetElem(&tfrm.col3, row))
+	V4MakeFromElems(result, tfrm.col0.GetElem(row), tfrm.col1.GetElem(row), tfrm.col2.GetElem(row), tfrm.col3.GetElem(row))
 }
 
 func T3Inverse(result, tfrm *Transform3) {
@@ -1023,18 +1023,18 @@ func T3MakeIdentity(result *Transform3) {
 	V3MakeFromScalar(&result.col3, 0.0)
 }
 
-func T3SetUpper3x3(result *Transform3, tfrm *Matrix3) {
-	V3Copy(&result.col0, &tfrm.col0)
-	V3Copy(&result.col1, &tfrm.col1)
-	V3Copy(&result.col2, &tfrm.col2)
+func (m *Transform3) SetUpper3x3(tfrm *Matrix3) {
+	V3Copy(&m.col0, &tfrm.col0)
+	V3Copy(&m.col1, &tfrm.col1)
+	V3Copy(&m.col2, &tfrm.col2)
 }
 
 func T3GetUpper3x3(result *Matrix3, tfrm *Transform3) {
 	M3MakeFromCols(result, &tfrm.col0, &tfrm.col1, &tfrm.col2)
 }
 
-func T3SetTranslation(result *Transform3, translateVec *Vector3) {
-	V3Copy(&result.col3, translateVec)
+func (t *Transform3) SetTranslation(translateVec *Vector3) {
+	V3Copy(&t.col3, translateVec)
 }
 
 func T3GetTranslation(result *Vector3, tfrm *Transform3) {
@@ -1107,9 +1107,9 @@ func T3MakeScale(result *Transform3, scaleVec *Vector3) {
 }
 
 func T3AppendScale(result, tfrm *Transform3, scaleVec *Vector3) {
-	V3ScalarMul(&result.col0, &tfrm.col0, V3GetX(scaleVec))
-	V3ScalarMul(&result.col1, &tfrm.col1, V3GetY(scaleVec))
-	V3ScalarMul(&result.col2, &tfrm.col2, V3GetZ(scaleVec))
+	V3ScalarMul(&result.col0, &tfrm.col0, scaleVec.X())
+	V3ScalarMul(&result.col1, &tfrm.col1, scaleVec.Y())
+	V3ScalarMul(&result.col2, &tfrm.col2, scaleVec.Z())
 	V3Copy(&result.col3, &tfrm.col3)
 }
 
@@ -1134,11 +1134,11 @@ func T3Select(result, tfrm0, tfrm1 *Transform3, select1 int) {
 	V3Select(&result.col3, &tfrm0.col3, &tfrm1.col3, select1)
 }
 
-func (tfrm *Transform3) String() string {
+func (t *Transform3) String() string {
 	var tmpV4_0, tmpV4_1, tmpV4_2 Vector4
-	T3GetRow(&tmpV4_0, tfrm, 0)
-	T3GetRow(&tmpV4_1, tfrm, 1)
-	T3GetRow(&tmpV4_2, tfrm, 2)
+	T3GetRow(&tmpV4_0, t, 0)
+	T3GetRow(&tmpV4_1, t, 1)
+	T3GetRow(&tmpV4_2, t, 2)
 	return tmpV4_0.String() + tmpV4_1.String() + tmpV4_2.String()
 }
 
@@ -1212,16 +1212,16 @@ func QMakeFromM3(result *Quat, tfrm *Matrix3) {
 }
 
 func V3Outer(result *Matrix3, tfrm0, tfrm1 *Vector3) {
-	V3ScalarMul(&result.col0, tfrm0, V3GetX(tfrm1))
-	V3ScalarMul(&result.col1, tfrm0, V3GetY(tfrm1))
-	V3ScalarMul(&result.col2, tfrm0, V3GetZ(tfrm1))
+	V3ScalarMul(&result.col0, tfrm0, tfrm1.X())
+	V3ScalarMul(&result.col1, tfrm0, tfrm1.Y())
+	V3ScalarMul(&result.col2, tfrm0, tfrm1.Z())
 }
 
 func V4Outer(result *Matrix4, tfrm0, tfrm1 *Vector4) {
-	V4ScalarMul(&result.col0, tfrm0, V4GetX(tfrm1))
-	V4ScalarMul(&result.col1, tfrm0, V4GetY(tfrm1))
-	V4ScalarMul(&result.col2, tfrm0, V4GetZ(tfrm1))
-	V4ScalarMul(&result.col3, tfrm0, V4GetW(tfrm1))
+	V4ScalarMul(&result.col0, tfrm0, tfrm1.X())
+	V4ScalarMul(&result.col1, tfrm0, tfrm1.Y())
+	V4ScalarMul(&result.col2, tfrm0, tfrm1.Z())
+	V4ScalarMul(&result.col3, tfrm0, tfrm1.W())
 }
 
 func V3RowMul(result *Vector3, vec *Vector3, mat *Matrix3) {

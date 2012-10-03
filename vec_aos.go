@@ -69,49 +69,49 @@ func V3Slerp(result *Vector3, t float32, unitVec0, unitVec1 *Vector3) {
 	V3Add(result, &tmpV3_0, &tmpV3_1)
 }
 
-func V3SetX(result *Vector3, x float32) {
-	result.x = x
+func (v *Vector3) SetX(x float32) {
+	v.x = x
 }
 
-func V3GetX(vec *Vector3) float32 {
-	return vec.x
+func (v *Vector3) X() float32 {
+	return v.x
 }
 
-func V3SetY(result *Vector3, y float32) {
-	result.y = y
+func (v *Vector3) SetY(y float32) {
+	v.y = y
 }
 
-func V3GetY(vec *Vector3) float32 {
-	return vec.y
+func (v *Vector3) Y() float32 {
+	return v.y
 }
 
-func V3SetZ(result *Vector3, z float32) {
-	result.z = z
+func (v *Vector3) SetZ(z float32) {
+	v.z = z
 }
 
-func V3GetZ(vec *Vector3) float32 {
-	return vec.z
+func (v *Vector3) Z() float32 {
+	return v.z
 }
 
-func V3SetElem(result *Vector3, index int, value float32) {
+func (v *Vector3) SetElem(index int, value float32) {
 	switch index {
 	case 0:
-		result.x = value
+		v.x = value
 	case 1:
-		result.y = value
+		v.y = value
 	case 2:
-		result.z = value
+		v.z = value
 	}
 }
 
-func V3GetElem(vec *Vector3, index int) float32 {
+func (v *Vector3) GetElem(index int) float32 {
 	switch index {
 	case 0:
-		return vec.x
+		return v.x
 	case 1:
-		return vec.y
+		return v.y
 	case 2:
-		return vec.z
+		return v.z
 	}
 	return 0
 }
@@ -212,10 +212,10 @@ func V3MaxPerElem(result, vec0, vec1 *Vector3) {
 	result.z = max(vec0.z, vec1.z)
 }
 
-func V3MaxElem(vec *Vector3) float32 {
+func (v *Vector3) MaxElem() float32 {
 	var result float32
-	result = max(vec.x, vec.y)
-	result = max(vec.z, result)
+	result = max(v.x, v.y)
+	result = max(v.z, result)
 	return result
 }
 
@@ -225,17 +225,16 @@ func V3MinPerElem(result, vec0, vec1 *Vector3) {
 	result.z = min(vec0.z, vec1.z)
 }
 
-func V3MinElem(vec *Vector3) float32 {
+func (v *Vector3) MinElem() float32 {
 	var result float32
-	result = min(vec.x, vec.y)
-	result = min(vec.z, result)
+	result = min(v.x, v.y)
+	result = min(v.z, result)
 	return result
 }
 
-func V3Sum(vec *Vector3) float32 {
+func (v *Vector3) Sum() float32 {
 	var result float32
-	result = vec.x + vec.y + vec.z
-	result = result + vec.z
+	result = v.x + v.y + v.z
 	return result
 }
 
@@ -246,19 +245,26 @@ func V3Dot(vec0, vec1 *Vector3) float32 {
 	return result
 }
 
-func V3LengthSqr(vec *Vector3) float32 {
-	result := vec.x * vec.x
-	result += vec.y * vec.y
-	result += vec.z * vec.z
+func (v *Vector3) Dot(vec1 *Vector3) float32 {
+	result := v.x * vec1.x
+	result += v.y * vec1.y
+	result += v.z * vec1.z
 	return result
 }
 
-func V3Length(vec *Vector3) float32 {
-	return sqrt(V3LengthSqr(vec))
+func (v *Vector3) LengthSqr() float32 {
+	result := v.x * v.x
+	result += v.y * v.y
+	result += v.z * v.z
+	return result
+}
+
+func (v *Vector3) Length() float32 {
+	return sqrt(v.LengthSqr())
 }
 
 func V3Normalize(result, vec *Vector3) {
-	lenSqr := V3LengthSqr(vec)
+	lenSqr := vec.LengthSqr()
 	lenInv := 1.0 / sqrt(lenSqr)
 	result.x = vec.x * lenInv
 	result.y = vec.y * lenInv
@@ -284,8 +290,8 @@ func V3Select(result, vec0, vec1 *Vector3, select1 int) {
 	}
 }
 
-func (vec *Vector3) String() string {
-	return fmt.Sprintf("( %f %f %f )\n", vec.x, vec.y, vec.z)
+func (v *Vector3) String() string {
+	return fmt.Sprintf("( %f %f %f )\n", v.x, v.y, v.z)
 }
 
 /*******/
@@ -305,8 +311,8 @@ func V4MakeFromElems(result *Vector4, x, y, z, w float32) {
 }
 
 func V4MakeFromV3Scalar(result *Vector4, xyz *Vector3, w float32) {
-	V4SetXYZ(result, xyz)
-	V4SetW(result, w)
+	result.SetXYZ(xyz)
+	result.SetW(w)
 }
 
 func V4MakeFromV3(result *Vector4, vec *Vector3) {
@@ -378,71 +384,72 @@ func V4Slerp(result *Vector4, t float32, unitVec0, unitVec1 *Vector4) {
 	V4Add(result, &tmpV4_0, &tmpV4_1)
 }
 
-func V4SetXYZ(result *Vector4, vec *Vector3) {
-	result.x = vec.x
-	result.y = vec.y
-	result.z = vec.z
+func (v *Vector4) SetXYZ(vec *Vector3) {
+	v.x = vec.x
+	v.y = vec.y
+	v.z = vec.z
 }
 
 func V4GetXYZ(result *Vector3, vec *Vector4) {
 	V3MakeFromElems(result, vec.x, vec.y, vec.z)
 }
 
-func V4SetX(result *Vector4, x float32) {
-	result.x = x
+func (v *Vector4) SetX(x float32) {
+	v.x = x
 }
 
-func V4GetX(vec *Vector4) float32 {
-	return vec.x
+func (v *Vector4) X() float32 {
+	return v.x
 }
 
-func V4SetY(result *Vector4, y float32) {
-	result.y = y
+func (v *Vector4) SetY(y float32) {
+	v.y = y
 }
 
-func V4GetY(vec *Vector4) float32 {
-	return vec.y
+func (v *Vector4) Y() float32 {
+	return v.y
 }
 
-func V4SetZ(result *Vector4, z float32) {
-	result.z = z
+func (v *Vector4) SetZ(z float32) {
+	v.z = z
 }
 
-func V4GetZ(vec *Vector4) float32 {
-	return vec.z
+func (v *Vector4) Z() float32 {
+	return v.z
 }
 
-func V4SetW(result *Vector4, w float32) {
-	result.w = w
+func (v *Vector4) SetW(w float32) {
+	v.w = w
 }
 
-func V4GetW(vec *Vector4) float32 {
-	return vec.w
+func (v *Vector4) W() float32 {
+	return v.w
 }
 
-func V4SetElem(result *Vector4, index int, value float32) {
+
+func (v *Vector4) SetElem(index int, value float32) {
 	switch index {
 	case 0:
-		result.x = value
+		v.x = value
 	case 1:
-		result.y = value
+		v.y = value
 	case 2:
-		result.z = value
+		v.z = value
 	case 3:
-		result.w = value
+		v.w = value
 	}
 }
 
-func V4GetElem(vec *Vector4, index int) float32 {
+func (v *Vector4) GetElem(index int) float32 {
 	switch index {
 	case 0:
-		return vec.x
+		return v.x
 	case 1:
-		return vec.y
+		return v.y
 	case 2:
-		return vec.z
+		return v.z
 	case 3:
-		return vec.w
+		return v.w
 	}
 	return 0
 }
@@ -554,11 +561,11 @@ func V4MaxPerElem(result, vec0, vec1 *Vector4) {
 	result.w = max(vec0.w, vec1.w)
 }
 
-func V4MaxElem(vec *Vector4) float32 {
+func (v *Vector4) MaxElem() float32 {
 	var result float32
-	result = max(vec.x, vec.y)
-	result = max(vec.z, result)
-	result = max(vec.w, result)
+	result = max(v.x, v.y)
+	result = max(v.z, result)
+	result = max(v.w, result)
 	return result
 }
 
@@ -569,19 +576,17 @@ func V4MinPerElem(result, vec0, vec1 *Vector4) {
 	result.w = min(vec0.w, vec1.w)
 }
 
-func V4MinElem(vec *Vector4) float32 {
+func (v *Vector4) MinElem() float32 {
 	var result float32
-	result = min(vec.x, vec.y)
-	result = min(vec.z, result)
-	result = min(vec.w, result)
+	result = min(v.x, v.y)
+	result = min(v.z, result)
+	result = min(v.w, result)
 	return result
 }
 
-func V4Sum(vec *Vector4) float32 {
+func (v *Vector4) Sum() float32 {
 	var result float32
-	result = vec.x + vec.y + vec.z
-	result = result + vec.z
-	result = result + vec.w
+	result = v.x + v.y + v.z + v.w
 	return result
 }
 
@@ -593,20 +598,28 @@ func V4Dot(vec0, vec1 *Vector4) float32 {
 	return result
 }
 
-func V4LengthSqr(vec *Vector4) float32 {
-	result := vec.x * vec.x
-	result += vec.y * vec.y
-	result += vec.z * vec.z
-	result += vec.w * vec.w
+func (v *Vector4) Dot(vec1 *Vector4) float32 {
+	result := v.x * vec1.x
+	result += v.y * vec1.y
+	result += v.z * vec1.z
+	result += v.w * vec1.w
 	return result
 }
 
-func V4Length(vec *Vector4) float32 {
-	return sqrt(V4LengthSqr(vec))
+func (v *Vector4) LengthSqr() float32 {
+	result := v.x * v.x
+	result += v.y * v.y
+	result += v.z * v.z
+	result += v.w * v.w
+	return result
+}
+
+func (v *Vector4) Length() float32 {
+	return sqrt(v.LengthSqr())
 }
 
 func V4Normalize(result, vec *Vector4) {
-	lenSqr := V4LengthSqr(vec)
+	lenSqr := vec.LengthSqr()
 	lenInv := 1.0 / sqrt(lenSqr)
 	result.x = vec.x * lenInv
 	result.y = vec.y * lenInv
@@ -628,8 +641,8 @@ func V4Select(result, vec0, vec1 *Vector4, select1 int) {
 	}
 }
 
-func (vec *Vector4) String() string {
-	return fmt.Sprintf("( %f %f %f %f )", vec.x, vec.y, vec.z, vec.w)
+func (v *Vector4) String() string {
+	return fmt.Sprintf("( %f %f %f %f )", v.x, v.y, v.z, v.w)
 }
 
 /*******/
@@ -665,49 +678,49 @@ func P3Lerp(result *Point3, t float32, pnt0, pnt1 *Point3) {
 	P3AddV3(result, pnt0, &tmpV3_1)
 }
 
-func P3SetX(result *Point3, x float32) {
-	result.x = x
+func (p *Point3) SetX(x float32) {
+	p.x = x
 }
 
-func P3GetX(pnt *Point3) float32 {
-	return pnt.x
+func (p *Point3) X() float32 {
+	return p.x
 }
 
-func P3SetY(result *Point3, y float32) {
-	result.y = y
+func (p *Point3) SetY(y float32) {
+	p.y = y
 }
 
-func P3GetY(pnt *Point3) float32 {
-	return pnt.y
+func (p *Point3) Y() float32 {
+	return p.y
 }
 
-func P3SetZ(result *Point3, z float32) {
-	result.z = z
+func (p *Point3) SetZ(z float32) {
+	p.z = z
 }
 
-func P3GetZ(pnt *Point3) float32 {
-	return pnt.z
+func (p *Point3) Z() float32 {
+	return p.z
 }
 
-func P3SetElem(result *Point3, index int, value float32) {
+func (p *Point3) SetElem(index int, value float32) {
 	switch index {
 	case 0:
-		result.x = value
+		p.x = value
 	case 1:
-		result.y = value
+		p.y = value
 	case 2:
-		result.z = value
+		p.z = value
 	}
 }
 
-func P3GetElem(pnt *Point3, index int) float32 {
+func (p *Point3) GetElem(index int) float32 {
 	switch index {
 	case 0:
-		return pnt.x
+		return p.x
 	case 1:
-		return pnt.y
+		return p.y
 	case 2:
-		return pnt.z
+		return p.z
 	}
 	return 0
 }
@@ -790,10 +803,10 @@ func P3MaxPerElem(result, pnt0, pnt1 *Point3) {
 	result.z = max(pnt0.z, pnt1.z)
 }
 
-func P3MaxElem(pnt *Point3) float32 {
+func (p *Point3) MaxElem() float32 {
 	var result float32
-	result = max(pnt.x, pnt.y)
-	result = max(pnt.z, result)
+	result = max(p.x, p.y)
+	result = max(p.z, result)
 	return result
 }
 
@@ -803,17 +816,16 @@ func P3MinPerElem(result, pnt0, pnt1 *Point3) {
 	result.z = min(pnt0.z, pnt1.z)
 }
 
-func P3MinElem(pnt *Point3) float32 {
+func (p *Point3) MinElem() float32 {
 	var result float32
-	result = min(pnt.x, pnt.y)
-	result = min(pnt.z, result)
+	result = min(p.x, p.y)
+	result = min(p.z, result)
 	return result
 }
 
-func P3Sum(pnt *Point3) float32 {
+func (p *Point3) Sum() float32 {
 	var result float32
-	result = pnt.x + pnt.y + pnt.z
-	result = result + pnt.z
+	result = p.x + p.y + p.z
 	return result
 }
 
@@ -829,35 +841,35 @@ func P3NonUniformScale(result, pnt *Point3, scaleVec *Vector3) {
 	P3MulPerElem(result, pnt, &tmpP3_0)
 }
 
-func P3Projection(pnt *Point3, unitVec *Vector3) float32 {
-	result := pnt.x * unitVec.x
-	result += pnt.y * unitVec.y
-	result += pnt.z * unitVec.z
+func (p *Point3) Projection(unitVec *Vector3) float32 {
+	result := p.x * unitVec.x
+	result += p.y * unitVec.y
+	result += p.z * unitVec.z
 	return result
 }
 
-func P3DistSqrFromOrigin(pnt *Point3) float32 {
+func (p *Point3) DistSqrFromOrigin() float32 {
 	var tmpV3_0 Vector3
-	V3MakeFromP3(&tmpV3_0, pnt)
-	return V3LengthSqr(&tmpV3_0)
+	V3MakeFromP3(&tmpV3_0, p)
+	return tmpV3_0.LengthSqr()
 }
 
-func P3DistFromOrigin(pnt *Point3) float32 {
+func (p *Point3) DistFromOrigin() float32 {
 	var tmpV3_0 Vector3
-	V3MakeFromP3(&tmpV3_0, pnt)
-	return V3Length(&tmpV3_0)
+	V3MakeFromP3(&tmpV3_0, p)
+	return tmpV3_0.Length()
 }
 
-func P3DistSqr(pnt0, pnt1 *Point3) float32 {
+func (p *Point3) DistSqr(pnt1 *Point3) float32 {
 	var tmpV3_0 Vector3
-	P3Sub(&tmpV3_0, pnt1, pnt0)
-	return V3LengthSqr(&tmpV3_0)
+	P3Sub(&tmpV3_0, pnt1, p)
+	return tmpV3_0.LengthSqr()
 }
 
-func P3Dist(pnt0, pnt1 *Point3) float32 {
+func (p *Point3) Dist(pnt1 *Point3) float32 {
 	var tmpV3_0 Vector3
-	P3Sub(&tmpV3_0, pnt1, pnt0)
-	return V3Length(&tmpV3_0)
+	P3Sub(&tmpV3_0, pnt1, p)
+	return tmpV3_0.Length()
 }
 
 func P3Select(result, pnt0, pnt1 *Point3, select1 int) {
@@ -872,6 +884,6 @@ func P3Select(result, pnt0, pnt1 *Point3, select1 int) {
 	}
 }
 
-func (pnt *Point3) String() string {
-	return fmt.Sprintf("( %f %f %f )", pnt.x, pnt.y, pnt.z)
+func (p *Point3) String() string {
+	return fmt.Sprintf("( %f %f %f )", p.x, p.y, p.z)
 }
