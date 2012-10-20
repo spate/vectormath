@@ -7,17 +7,17 @@ package vectormath
 import "fmt"
 
 func QCopy(result, quat *Quat) {
-	result.x = quat.x
-	result.y = quat.y
-	result.z = quat.z
-	result.w = quat.w
+	result.X = quat.X
+	result.Y = quat.Y
+	result.Z = quat.Z
+	result.W = quat.W
 }
 
 func QMakeFromElems(result *Quat, x, y, z, w float32) {
-	result.x = x
-	result.y = y
-	result.z = z
-	result.w = w
+	result.X = x
+	result.Y = y
+	result.Z = z
+	result.W = w
 }
 
 func QMakeFromV3Scalar(result *Quat, xyz *Vector3, w float32) {
@@ -26,17 +26,17 @@ func QMakeFromV3Scalar(result *Quat, xyz *Vector3, w float32) {
 }
 
 func QMakeFromV4(result *Quat, vec *Vector4) {
-	result.x = vec.x
-	result.y = vec.y
-	result.z = vec.z
-	result.w = vec.w
+	result.X = vec.X
+	result.Y = vec.Y
+	result.Z = vec.Z
+	result.W = vec.W
 }
 
 func QMakeFromScalar(result *Quat, scalar float32) {
-	result.x = scalar
-	result.y = scalar
-	result.z = scalar
-	result.w = scalar
+	result.X = scalar
+	result.Y = scalar
+	result.Z = scalar
+	result.W = scalar
 }
 
 func QMakeIdentity(result *Quat) {
@@ -82,126 +82,110 @@ func QSquad(result *Quat, t float32, unitQuat0, unitQuat1, unitQuat2, unitQuat3 
 }
 
 func (q *Quat) SetXYZ(vec *Vector3) {
-	q.x = vec.x
-	q.y = vec.y
-	q.z = vec.z
+	q.X = vec.X
+	q.Y = vec.Y
+	q.Z = vec.Z
 }
 
 func (q *Quat) SetX(x float32) {
-	q.x = x
-}
-
-func (q *Quat) X() float32 {
-	return q.x
+	q.X = x
 }
 
 func (q *Quat) SetY(y float32) {
-	q.y = y
-}
-
-func (q *Quat) Y() float32 {
-	return q.y
+	q.Y = y
 }
 
 func (q *Quat) SetZ(z float32) {
-	q.z = z
-}
-
-func (q *Quat) Z() float32 {
-	return q.z
+	q.Z = z
 }
 
 func (q *Quat) SetW(w float32) {
-	q.w = w
-}
-
-func (q *Quat) W() float32 {
-	return q.w
+	q.W = w
 }
 
 func (q *Quat) SetElem(index int, value float32) {
 	switch index {
 	case 0:
-		q.x = value
+		q.X = value
 	case 1:
-		q.y = value
+		q.Y = value
 	case 2:
-		q.z = value
+		q.Z = value
 	case 3:
-		q.w = value
+		q.W = value
 	}
 }
 
 func (q *Quat) GetElem(index int) float32 {
 	switch index {
 	case 0:
-		return q.x
+		return q.X
 	case 1:
-		return q.y
+		return q.Y
 	case 2:
-		return q.z
+		return q.Z
 	case 3:
-		return q.w
+		return q.W
 	}
 	return 0
 }
 
 func QAdd(result, quat0, quat1 *Quat) {
-	result.x = quat0.x + quat1.x
-	result.y = quat0.y + quat1.y
-	result.z = quat0.z + quat1.z
-	result.w = quat0.w + quat1.w
+	result.X = quat0.X + quat1.X
+	result.Y = quat0.Y + quat1.Y
+	result.Z = quat0.Z + quat1.Z
+	result.W = quat0.W + quat1.W
 }
 
 func QSub(result, quat0, quat1 *Quat) {
-	result.x = quat0.x - quat1.x
-	result.y = quat0.y - quat1.y
-	result.z = quat0.z - quat1.z
-	result.w = quat0.w - quat1.w
+	result.X = quat0.X - quat1.X
+	result.Y = quat0.Y - quat1.Y
+	result.Z = quat0.Z - quat1.Z
+	result.W = quat0.W - quat1.W
 }
 
 func QScalarMul(result, quat *Quat, scalar float32) {
-	result.x = quat.x * scalar
-	result.y = quat.y * scalar
-	result.z = quat.z * scalar
-	result.w = quat.w * scalar
+	result.X = quat.X * scalar
+	result.Y = quat.Y * scalar
+	result.Z = quat.Z * scalar
+	result.W = quat.W * scalar
 }
 
 func QScalarDiv(result, quat *Quat, scalar float32) {
-	result.x = quat.x / scalar
-	result.y = quat.y / scalar
-	result.z = quat.z / scalar
-	result.w = quat.w / scalar
+	result.X = quat.X / scalar
+	result.Y = quat.Y / scalar
+	result.Z = quat.Z / scalar
+	result.W = quat.W / scalar
 }
 
 func QNeg(result, quat *Quat) {
-	result.x = -quat.x
-	result.y = -quat.y
-	result.z = -quat.z
-	result.w = -quat.w
+	result.X = -quat.X
+	result.Y = -quat.Y
+	result.Z = -quat.Z
+	result.W = -quat.W
 }
 
 func QDot(quat0, quat1 *Quat) float32 {
-	result := quat0.x * quat1.x
-	result += quat0.y * quat1.y
-	result += quat0.z * quat1.z
-	result += quat0.w * quat1.w
+	result := quat0.X * quat1.X
+	result += quat0.Y * quat1.Y
+	result += quat0.Z * quat1.Z
+	result += quat0.W * quat1.W
 	return result
 }
 
 func (q *Quat) Dot(quat1 *Quat) float32 {
-	result := q.x * quat1.x
-	result += q.y * quat1.y
-	result += q.z * quat1.z
-	result += q.w * quat1.w
+	result := q.X * quat1.X
+	result += q.Y * quat1.Y
+	result += q.Z * quat1.Z
+	result += q.W * quat1.W
 	return result
 }
 
 func (q *Quat) Norm() float32 {
-	result := q.x * q.x
-	result += q.y * q.y
-	result += q.z * q.z
-	result += q.w * q.w
+	result := q.X * q.X
+	result += q.Y * q.Y
+	result += q.Z * q.Z
+	result += q.W * q.W
 	return result
 }
 
@@ -212,10 +196,10 @@ func (q *Quat) Length() float32 {
 func QNormalize(result, quat *Quat) {
 	lenSqr := quat.Norm()
 	lenInv := 1.0 / sqrt(lenSqr)
-	result.x = quat.x * lenInv
-	result.y = quat.y * lenInv
-	result.z = quat.z * lenInv
-	result.w = quat.w * lenInv
+	result.X = quat.X * lenInv
+	result.Y = quat.Y * lenInv
+	result.Z = quat.Z * lenInv
+	result.W = quat.W * lenInv
 }
 
 func QMakeRotationArc(result *Quat, unitVec0, unitVec1 *Vector3) {
@@ -258,41 +242,41 @@ func QMakeRotationZ(result *Quat, radians float32) {
 }
 
 func QMul(result, quat0, quat1 *Quat) {
-	tmpX := (quat0.w * quat1.x) + (quat0.x * quat1.w) + (quat0.y * quat1.z) - (quat0.z * quat1.y)
-	tmpY := (quat0.w * quat1.y) + (quat0.y * quat1.w) + (quat0.z * quat1.x) - (quat0.x * quat1.z)
-	tmpZ := (quat0.w * quat1.z) + (quat0.z * quat1.w) + (quat0.x * quat1.y) - (quat0.y * quat1.x)
-	tmpW := (quat0.w * quat1.w) - (quat0.x * quat1.x) - (quat0.y * quat1.y) - (quat0.z * quat1.z)
+	tmpX := (quat0.W * quat1.X) + (quat0.X * quat1.W) + (quat0.Y * quat1.Z) - (quat0.Z * quat1.Y)
+	tmpY := (quat0.W * quat1.Y) + (quat0.Y * quat1.W) + (quat0.Z * quat1.X) - (quat0.X * quat1.Z)
+	tmpZ := (quat0.W * quat1.Z) + (quat0.Z * quat1.W) + (quat0.X * quat1.Y) - (quat0.Y * quat1.X)
+	tmpW := (quat0.W * quat1.W) - (quat0.X * quat1.X) - (quat0.Y * quat1.Y) - (quat0.Z * quat1.Z)
 	QMakeFromElems(result, tmpX, tmpY, tmpZ, tmpW)
 }
 
 func QRotate(result *Vector3, quat *Quat, vec *Vector3) {
-	tmpX := (quat.w * vec.x) + (quat.y * vec.z) - (quat.z * vec.y)
-	tmpY := (quat.w * vec.y) + (quat.z * vec.x) - (quat.x * vec.z)
-	tmpZ := (quat.w * vec.z) + (quat.x * vec.y) - (quat.y * vec.x)
-	tmpW := (quat.x * vec.x) + (quat.y * vec.y) + (quat.z * vec.z)
-	result.x = (tmpW * quat.x) + (tmpX * quat.w) - (tmpY * quat.z) + (tmpZ * quat.y)
-	result.y = (tmpW * quat.y) + (tmpY * quat.w) - (tmpZ * quat.x) + (tmpX * quat.z)
-	result.z = (tmpW * quat.z) + (tmpZ * quat.w) - (tmpX * quat.y) + (tmpY * quat.x)
+	tmpX := (quat.W * vec.X) + (quat.Y * vec.Z) - (quat.Z * vec.Y)
+	tmpY := (quat.W * vec.Y) + (quat.Z * vec.X) - (quat.X * vec.Z)
+	tmpZ := (quat.W * vec.Z) + (quat.X * vec.Y) - (quat.Y * vec.X)
+	tmpW := (quat.X * vec.X) + (quat.Y * vec.Y) + (quat.Z * vec.Z)
+	result.X = (tmpW * quat.X) + (tmpX * quat.W) - (tmpY * quat.Z) + (tmpZ * quat.Y)
+	result.Y = (tmpW * quat.Y) + (tmpY * quat.W) - (tmpZ * quat.X) + (tmpX * quat.Z)
+	result.Z = (tmpW * quat.Z) + (tmpZ * quat.W) - (tmpX * quat.Y) + (tmpY * quat.X)
 }
 
 func QConj(result, quat *Quat) {
-	QMakeFromElems(result, -quat.x, -quat.y, -quat.z, quat.w)
+	QMakeFromElems(result, -quat.X, -quat.Y, -quat.Z, quat.W)
 }
 
 func QSelect(result, quat0, quat1 *Quat, select1 int) {
 	if select1 != 0 {
-		result.x = quat1.x
-		result.y = quat1.y
-		result.z = quat1.z
-		result.w = quat1.w
+		result.X = quat1.X
+		result.Y = quat1.Y
+		result.Z = quat1.Z
+		result.W = quat1.W
 	} else {
-		result.x = quat0.x
-		result.y = quat0.y
-		result.z = quat0.z
-		result.w = quat0.w
+		result.X = quat0.X
+		result.Y = quat0.Y
+		result.Z = quat0.Z
+		result.W = quat0.W
 	}
 }
 
 func (q *Quat) String() string {
-	return fmt.Sprintf("( %f %f %f %f )\n", q.x, q.y, q.z, q.w)
+	return fmt.Sprintf("( %f %f %f %f )\n", q.X, q.Y, q.Z, q.W)
 }

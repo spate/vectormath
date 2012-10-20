@@ -5,19 +5,19 @@
 package vectormath
 
 type Vector3 struct {
-	x, y, z, _ float32
+	X, Y, Z, _ float32
 }
 
 type Vector4 struct {
-	x, y, z, w float32
+	X, Y, Z, W float32
 }
 
 type Point3 struct {
-	x, y, z, _ float32
+	X, Y, Z, _ float32
 }
 
 type Quat struct {
-	x, y, z, w float32
+	X, Y, Z, W float32
 }
 
 type Matrix3 struct {

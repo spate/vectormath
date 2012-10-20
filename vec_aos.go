@@ -9,27 +9,27 @@ import "fmt"
 const g_SLERP_TOL = 0.999
 
 func V3Copy(result *Vector3, vec *Vector3) {
-	result.x = vec.x
-	result.y = vec.y
-	result.z = vec.z
+	result.X = vec.X
+	result.Y = vec.Y
+	result.Z = vec.Z
 }
 
 func V3MakeFromElems(result *Vector3, x, y, z float32) {
-	result.x = x
-	result.y = y
-	result.z = z
+	result.X = x
+	result.Y = y
+	result.Z = z
 }
 
 func V3MakeFromP3(result *Vector3, pnt *Point3) {
-	result.x = pnt.x
-	result.y = pnt.y
-	result.z = pnt.z
+	result.X = pnt.X
+	result.Y = pnt.Y
+	result.Z = pnt.Z
 }
 
 func V3MakeFromScalar(result *Vector3, scalar float32) {
-	result.x = scalar
-	result.y = scalar
-	result.z = scalar
+	result.X = scalar
+	result.Y = scalar
+	result.Z = scalar
 }
 
 func V3MakeXAxis(result *Vector3) {
@@ -70,192 +70,180 @@ func V3Slerp(result *Vector3, t float32, unitVec0, unitVec1 *Vector3) {
 }
 
 func (v *Vector3) SetX(x float32) {
-	v.x = x
-}
-
-func (v *Vector3) X() float32 {
-	return v.x
+	v.X = x
 }
 
 func (v *Vector3) SetY(y float32) {
-	v.y = y
-}
-
-func (v *Vector3) Y() float32 {
-	return v.y
+	v.Y = y
 }
 
 func (v *Vector3) SetZ(z float32) {
-	v.z = z
-}
-
-func (v *Vector3) Z() float32 {
-	return v.z
+	v.Z = z
 }
 
 func (v *Vector3) SetElem(index int, value float32) {
 	switch index {
 	case 0:
-		v.x = value
+		v.X = value
 	case 1:
-		v.y = value
+		v.Y = value
 	case 2:
-		v.z = value
+		v.Z = value
 	}
 }
 
 func (v *Vector3) GetElem(index int) float32 {
 	switch index {
 	case 0:
-		return v.x
+		return v.X
 	case 1:
-		return v.y
+		return v.Y
 	case 2:
-		return v.z
+		return v.Z
 	}
 	return 0
 }
 
 func V3Add(result, vec0, vec1 *Vector3) {
-	result.x = vec0.x + vec1.x
-	result.y = vec0.y + vec1.y
-	result.z = vec0.z + vec1.z
+	result.X = vec0.X + vec1.X
+	result.Y = vec0.Y + vec1.Y
+	result.Z = vec0.Z + vec1.Z
 }
 
 func V3Sub(result, vec0, vec1 *Vector3) {
-	result.x = vec0.x - vec1.x
-	result.y = vec0.y - vec1.y
-	result.z = vec0.z - vec1.z
+	result.X = vec0.X - vec1.X
+	result.Y = vec0.Y - vec1.Y
+	result.Z = vec0.Z - vec1.Z
 }
 
 func V3AddP3(result, vec0 *Vector3, pnt1 *Point3) {
-	result.x = vec0.x + pnt1.x
-	result.y = vec0.y + pnt1.y
-	result.z = vec0.z + pnt1.z
+	result.X = vec0.X + pnt1.X
+	result.Y = vec0.Y + pnt1.Y
+	result.Z = vec0.Z + pnt1.Z
 }
 
 func V3ScalarMul(result, vec *Vector3, scalar float32) {
-	result.x = vec.x * scalar
-	result.y = vec.y * scalar
-	result.z = vec.z * scalar
+	result.X = vec.X * scalar
+	result.Y = vec.Y * scalar
+	result.Z = vec.Z * scalar
 }
 
 func V3ScalarDiv(result, vec *Vector3, scalar float32) {
-	result.x = vec.x / scalar
-	result.y = vec.y / scalar
-	result.z = vec.z / scalar
+	result.X = vec.X / scalar
+	result.Y = vec.Y / scalar
+	result.Z = vec.Z / scalar
 }
 
 func V3Neg(result, vec *Vector3) {
-	result.x = -vec.x
-	result.y = -vec.y
-	result.z = -vec.z
+	result.X = -vec.X
+	result.Y = -vec.Y
+	result.Z = -vec.Z
 }
 
 func V3MulPerElem(result, vec0, vec1 *Vector3) {
-	result.x = vec0.x * vec1.x
-	result.y = vec0.y * vec1.y
-	result.z = vec0.z * vec1.z
+	result.X = vec0.X * vec1.X
+	result.Y = vec0.Y * vec1.Y
+	result.Z = vec0.Z * vec1.Z
 }
 
 func V3DivPerElem(result, vec0, vec1 *Vector3) {
-	result.x = vec0.x / vec1.x
-	result.y = vec0.y / vec1.y
-	result.z = vec0.z / vec1.z
+	result.X = vec0.X / vec1.X
+	result.Y = vec0.Y / vec1.Y
+	result.Z = vec0.Z / vec1.Z
 }
 
 func V3RecipPerElem(result, vec *Vector3) {
-	result.x = 1.0 / vec.x
-	result.y = 1.0 / vec.y
-	result.z = 1.0 / vec.z
+	result.X = 1.0 / vec.X
+	result.Y = 1.0 / vec.Y
+	result.Z = 1.0 / vec.Z
 }
 
 func V3SqrtPerElem(result, vec *Vector3) {
-	result.x = sqrt(vec.x)
-	result.y = sqrt(vec.y)
-	result.z = sqrt(vec.z)
+	result.X = sqrt(vec.X)
+	result.Y = sqrt(vec.Y)
+	result.Z = sqrt(vec.Z)
 }
 
 func V3RsqrtPerElem(result, vec *Vector3) {
-	result.x = 1.0 / sqrt(vec.x)
-	result.y = 1.0 / sqrt(vec.y)
-	result.z = 1.0 / sqrt(vec.z)
+	result.X = 1.0 / sqrt(vec.X)
+	result.Y = 1.0 / sqrt(vec.Y)
+	result.Z = 1.0 / sqrt(vec.Z)
 }
 
 func V3AbsPerElem(result, vec *Vector3) {
-	result.x = abs(vec.x)
-	result.y = abs(vec.y)
-	result.z = abs(vec.z)
+	result.X = abs(vec.X)
+	result.Y = abs(vec.Y)
+	result.Z = abs(vec.Z)
 }
 
 func V3CopySignPerElem(result, vec0, vec1 *Vector3) {
-	if vec1.x < 0.0 {
-		result.x = -abs(vec0.x)
+	if vec1.X < 0.0 {
+		result.X = -abs(vec0.X)
 	} else {
-		result.x = abs(vec0.x)
+		result.X = abs(vec0.X)
 	}
-	if vec1.y < 0.0 {
-		result.y = -abs(vec0.y)
+	if vec1.Y < 0.0 {
+		result.Y = -abs(vec0.Y)
 	} else {
-		result.y = abs(vec0.y)
+		result.Y = abs(vec0.Y)
 	}
-	if vec1.z < 0.0 {
-		result.z = -abs(vec0.z)
+	if vec1.Z < 0.0 {
+		result.Z = -abs(vec0.Z)
 	} else {
-		result.z = abs(vec0.z)
+		result.Z = abs(vec0.Z)
 	}
 }
 
 func V3MaxPerElem(result, vec0, vec1 *Vector3) {
-	result.x = max(vec0.x, vec1.x)
-	result.y = max(vec0.y, vec1.y)
-	result.z = max(vec0.z, vec1.z)
+	result.X = max(vec0.X, vec1.X)
+	result.Y = max(vec0.Y, vec1.Y)
+	result.Z = max(vec0.Z, vec1.Z)
 }
 
 func (v *Vector3) MaxElem() float32 {
 	var result float32
-	result = max(v.x, v.y)
-	result = max(v.z, result)
+	result = max(v.X, v.Y)
+	result = max(v.Z, result)
 	return result
 }
 
 func V3MinPerElem(result, vec0, vec1 *Vector3) {
-	result.x = min(vec0.x, vec1.x)
-	result.y = min(vec0.y, vec1.y)
-	result.z = min(vec0.z, vec1.z)
+	result.X = min(vec0.X, vec1.X)
+	result.Y = min(vec0.Y, vec1.Y)
+	result.Z = min(vec0.Z, vec1.Z)
 }
 
 func (v *Vector3) MinElem() float32 {
 	var result float32
-	result = min(v.x, v.y)
-	result = min(v.z, result)
+	result = min(v.X, v.Y)
+	result = min(v.Z, result)
 	return result
 }
 
 func (v *Vector3) Sum() float32 {
 	var result float32
-	result = v.x + v.y + v.z
+	result = v.X + v.Y + v.Z
 	return result
 }
 
 func V3Dot(vec0, vec1 *Vector3) float32 {
-	result := vec0.x * vec1.x
-	result += vec0.y * vec1.y
-	result += vec0.z * vec1.z
+	result := vec0.X * vec1.X
+	result += vec0.Y * vec1.Y
+	result += vec0.Z * vec1.Z
 	return result
 }
 
 func (v *Vector3) Dot(vec1 *Vector3) float32 {
-	result := v.x * vec1.x
-	result += v.y * vec1.y
-	result += v.z * vec1.z
+	result := v.X * vec1.X
+	result += v.Y * vec1.Y
+	result += v.Z * vec1.Z
 	return result
 }
 
 func (v *Vector3) LengthSqr() float32 {
-	result := v.x * v.x
-	result += v.y * v.y
-	result += v.z * v.z
+	result := v.X * v.X
+	result += v.Y * v.Y
+	result += v.Z * v.Z
 	return result
 }
 
@@ -266,48 +254,48 @@ func (v *Vector3) Length() float32 {
 func V3Normalize(result, vec *Vector3) {
 	lenSqr := vec.LengthSqr()
 	lenInv := 1.0 / sqrt(lenSqr)
-	result.x = vec.x * lenInv
-	result.y = vec.y * lenInv
-	result.z = vec.z * lenInv
+	result.X = vec.X * lenInv
+	result.Y = vec.Y * lenInv
+	result.Z = vec.Z * lenInv
 }
 
 func V3Cross(result, vec0, vec1 *Vector3) {
-	tmpX := vec0.y*vec1.z - vec0.z*vec1.y
-	tmpY := vec0.z*vec1.x - vec0.x*vec1.z
-	tmpZ := vec0.x*vec1.y - vec0.y*vec1.x
+	tmpX := vec0.Y*vec1.Z - vec0.Z*vec1.Y
+	tmpY := vec0.Z*vec1.X - vec0.X*vec1.Z
+	tmpZ := vec0.X*vec1.Y - vec0.Y*vec1.X
 	V3MakeFromElems(result, tmpX, tmpY, tmpZ)
 }
 
 func V3Select(result, vec0, vec1 *Vector3, select1 int) {
 	if select1 != 0 {
-		result.x = vec1.x
-		result.y = vec1.y
-		result.z = vec1.z
+		result.X = vec1.X
+		result.Y = vec1.Y
+		result.Z = vec1.Z
 	} else {
-		result.x = vec0.x
-		result.y = vec0.y
-		result.z = vec0.z
+		result.X = vec0.X
+		result.Y = vec0.Y
+		result.Z = vec0.Z
 	}
 }
 
 func (v *Vector3) String() string {
-	return fmt.Sprintf("( %f %f %f )\n", v.x, v.y, v.z)
+	return fmt.Sprintf("( %f %f %f )\n", v.X, v.Y, v.Z)
 }
 
 /*******/
 
 func V4Copy(result, vec *Vector4) {
-	result.x = vec.x
-	result.y = vec.y
-	result.z = vec.z
-	result.w = vec.w
+	result.X = vec.X
+	result.Y = vec.Y
+	result.Z = vec.Z
+	result.W = vec.W
 }
 
 func V4MakeFromElems(result *Vector4, x, y, z, w float32) {
-	result.x = x
-	result.y = y
-	result.z = z
-	result.w = w
+	result.X = x
+	result.Y = y
+	result.Z = z
+	result.W = w
 }
 
 func V4MakeFromV3Scalar(result *Vector4, xyz *Vector3, w float32) {
@@ -316,31 +304,31 @@ func V4MakeFromV3Scalar(result *Vector4, xyz *Vector3, w float32) {
 }
 
 func V4MakeFromV3(result *Vector4, vec *Vector3) {
-	result.x = vec.x
-	result.y = vec.y
-	result.z = vec.z
-	result.w = 0.0
+	result.X = vec.X
+	result.Y = vec.Y
+	result.Z = vec.Z
+	result.W = 0.0
 }
 
 func V4MakeFromP3(result *Vector4, pnt *Point3) {
-	result.x = pnt.x
-	result.y = pnt.y
-	result.z = pnt.z
-	result.w = 1.0
+	result.X = pnt.X
+	result.Y = pnt.Y
+	result.Z = pnt.Z
+	result.W = 1.0
 }
 
 func V4MakeFromQ(result *Vector4, quat *Quat) {
-	result.x = quat.x
-	result.y = quat.y
-	result.z = quat.z
-	result.w = quat.w
+	result.X = quat.X
+	result.Y = quat.Y
+	result.Z = quat.Z
+	result.W = quat.W
 }
 
 func V4MakeFromScalar(result *Vector4, scalar float32) {
-	result.x = scalar
-	result.y = scalar
-	result.z = scalar
-	result.w = scalar
+	result.X = scalar
+	result.Y = scalar
+	result.Z = scalar
+	result.W = scalar
 }
 
 func V4MakeXAxis(result *Vector4) {
@@ -385,232 +373,215 @@ func V4Slerp(result *Vector4, t float32, unitVec0, unitVec1 *Vector4) {
 }
 
 func (v *Vector4) SetXYZ(vec *Vector3) {
-	v.x = vec.x
-	v.y = vec.y
-	v.z = vec.z
+	v.X = vec.X
+	v.Y = vec.Y
+	v.Z = vec.Z
 }
 
 func V4GetXYZ(result *Vector3, vec *Vector4) {
-	V3MakeFromElems(result, vec.x, vec.y, vec.z)
+	V3MakeFromElems(result, vec.X, vec.Y, vec.Z)
 }
 
 func (v *Vector4) SetX(x float32) {
-	v.x = x
-}
-
-func (v *Vector4) X() float32 {
-	return v.x
+	v.X = x
 }
 
 func (v *Vector4) SetY(y float32) {
-	v.y = y
-}
-
-func (v *Vector4) Y() float32 {
-	return v.y
+	v.Y = y
 }
 
 func (v *Vector4) SetZ(z float32) {
-	v.z = z
-}
-
-func (v *Vector4) Z() float32 {
-	return v.z
+	v.Z = z
 }
 
 func (v *Vector4) SetW(w float32) {
-	v.w = w
+	v.W = w
 }
-
-func (v *Vector4) W() float32 {
-	return v.w
-}
-
 
 func (v *Vector4) SetElem(index int, value float32) {
 	switch index {
 	case 0:
-		v.x = value
+		v.X = value
 	case 1:
-		v.y = value
+		v.Y = value
 	case 2:
-		v.z = value
+		v.Z = value
 	case 3:
-		v.w = value
+		v.W = value
 	}
 }
 
 func (v *Vector4) GetElem(index int) float32 {
 	switch index {
 	case 0:
-		return v.x
+		return v.X
 	case 1:
-		return v.y
+		return v.Y
 	case 2:
-		return v.z
+		return v.Z
 	case 3:
-		return v.w
+		return v.W
 	}
 	return 0
 }
 
 func V4Add(result, vec0, vec1 *Vector4) {
-	result.x = vec0.x + vec1.x
-	result.y = vec0.y + vec1.y
-	result.z = vec0.z + vec1.z
-	result.w = vec0.w + vec1.w
+	result.X = vec0.X + vec1.X
+	result.Y = vec0.Y + vec1.Y
+	result.Z = vec0.Z + vec1.Z
+	result.W = vec0.W + vec1.W
 }
 
 func V4Sub(result, vec0, vec1 *Vector4) {
-	result.x = vec0.x - vec1.x
-	result.y = vec0.y - vec1.y
-	result.z = vec0.z - vec1.z
-	result.w = vec0.w - vec1.w
+	result.X = vec0.X - vec1.X
+	result.Y = vec0.Y - vec1.Y
+	result.Z = vec0.Z - vec1.Z
+	result.W = vec0.W - vec1.W
 }
 
 func V4ScalarMul(result, vec *Vector4, scalar float32) {
-	result.x = vec.x * scalar
-	result.y = vec.y * scalar
-	result.z = vec.z * scalar
-	result.w = vec.w * scalar
+	result.X = vec.X * scalar
+	result.Y = vec.Y * scalar
+	result.Z = vec.Z * scalar
+	result.W = vec.W * scalar
 }
 
 func V4ScalarDiv(result, vec *Vector4, scalar float32) {
-	result.x = vec.x / scalar
-	result.y = vec.y / scalar
-	result.z = vec.z / scalar
-	result.w = vec.w / scalar
+	result.X = vec.X / scalar
+	result.Y = vec.Y / scalar
+	result.Z = vec.Z / scalar
+	result.W = vec.W / scalar
 }
 
 func V4Neg(result, vec *Vector4) {
-	result.x = -vec.x
-	result.y = -vec.y
-	result.z = -vec.z
-	result.w = -vec.w
+	result.X = -vec.X
+	result.Y = -vec.Y
+	result.Z = -vec.Z
+	result.W = -vec.W
 }
 
 func V4MulPerElem(result, vec0, vec1 *Vector4) {
-	result.x = vec0.x * vec1.x
-	result.y = vec0.y * vec1.y
-	result.z = vec0.z * vec1.z
-	result.w = vec0.w * vec1.w
+	result.X = vec0.X * vec1.X
+	result.Y = vec0.Y * vec1.Y
+	result.Z = vec0.Z * vec1.Z
+	result.W = vec0.W * vec1.W
 }
 
 func V4DivPerElem(result, vec0, vec1 *Vector4) {
-	result.x = vec0.x / vec1.x
-	result.y = vec0.y / vec1.y
-	result.z = vec0.z / vec1.z
-	result.w = vec0.w / vec1.w
+	result.X = vec0.X / vec1.X
+	result.Y = vec0.Y / vec1.Y
+	result.Z = vec0.Z / vec1.Z
+	result.W = vec0.W / vec1.W
 }
 
 func V4RecipPerElem(result, vec *Vector4) {
-	result.x = 1.0 / vec.x
-	result.y = 1.0 / vec.y
-	result.z = 1.0 / vec.z
-	result.w = 1.0 / vec.w
+	result.X = 1.0 / vec.X
+	result.Y = 1.0 / vec.Y
+	result.Z = 1.0 / vec.Z
+	result.W = 1.0 / vec.W
 }
 
 func V4SqrtPerElem(result, vec *Vector4) {
-	result.x = sqrt(vec.x)
-	result.y = sqrt(vec.y)
-	result.z = sqrt(vec.z)
-	result.w = sqrt(vec.w)
+	result.X = sqrt(vec.X)
+	result.Y = sqrt(vec.Y)
+	result.Z = sqrt(vec.Z)
+	result.W = sqrt(vec.W)
 }
 
 func V4RsqrtPerElem(result, vec *Vector4) {
-	result.x = 1.0 / sqrt(vec.x)
-	result.y = 1.0 / sqrt(vec.y)
-	result.z = 1.0 / sqrt(vec.z)
-	result.w = 1.0 / sqrt(vec.w)
+	result.X = 1.0 / sqrt(vec.X)
+	result.Y = 1.0 / sqrt(vec.Y)
+	result.Z = 1.0 / sqrt(vec.Z)
+	result.W = 1.0 / sqrt(vec.W)
 }
 
 func V4AbsPerElem(result, vec *Vector4) {
-	result.x = abs(vec.x)
-	result.y = abs(vec.y)
-	result.z = abs(vec.z)
-	result.w = abs(vec.w)
+	result.X = abs(vec.X)
+	result.Y = abs(vec.Y)
+	result.Z = abs(vec.Z)
+	result.W = abs(vec.W)
 }
 
 func V4CopySignPerElem(result, vec0, vec1 *Vector4) {
-	if vec1.x < 0.0 {
-		result.x = -abs(vec0.x)
+	if vec1.X < 0.0 {
+		result.X = -abs(vec0.X)
 	} else {
-		result.x = abs(vec0.x)
+		result.X = abs(vec0.X)
 	}
-	if vec1.y < 0.0 {
-		result.y = -abs(vec0.y)
+	if vec1.Y < 0.0 {
+		result.Y = -abs(vec0.Y)
 	} else {
-		result.y = abs(vec0.y)
+		result.Y = abs(vec0.Y)
 	}
-	if vec1.z < 0.0 {
-		result.z = -abs(vec0.z)
+	if vec1.Z < 0.0 {
+		result.Z = -abs(vec0.Z)
 	} else {
-		result.z = abs(vec0.z)
+		result.Z = abs(vec0.Z)
 	}
-	if vec1.w < 0.0 {
-		result.w = -abs(vec0.w)
+	if vec1.W < 0.0 {
+		result.W = -abs(vec0.W)
 	} else {
-		result.w = abs(vec0.w)
+		result.W = abs(vec0.W)
 	}
 }
 
 func V4MaxPerElem(result, vec0, vec1 *Vector4) {
-	result.x = max(vec0.x, vec1.x)
-	result.y = max(vec0.y, vec1.y)
-	result.z = max(vec0.z, vec1.z)
-	result.w = max(vec0.w, vec1.w)
+	result.X = max(vec0.X, vec1.X)
+	result.Y = max(vec0.Y, vec1.Y)
+	result.Z = max(vec0.Z, vec1.Z)
+	result.W = max(vec0.W, vec1.W)
 }
 
 func (v *Vector4) MaxElem() float32 {
 	var result float32
-	result = max(v.x, v.y)
-	result = max(v.z, result)
-	result = max(v.w, result)
+	result = max(v.X, v.Y)
+	result = max(v.Z, result)
+	result = max(v.W, result)
 	return result
 }
 
 func V4MinPerElem(result, vec0, vec1 *Vector4) {
-	result.x = min(vec0.x, vec1.x)
-	result.y = min(vec0.y, vec1.y)
-	result.z = min(vec0.z, vec1.z)
-	result.w = min(vec0.w, vec1.w)
+	result.X = min(vec0.X, vec1.X)
+	result.Y = min(vec0.Y, vec1.Y)
+	result.Z = min(vec0.Z, vec1.Z)
+	result.W = min(vec0.W, vec1.W)
 }
 
 func (v *Vector4) MinElem() float32 {
 	var result float32
-	result = min(v.x, v.y)
-	result = min(v.z, result)
-	result = min(v.w, result)
+	result = min(v.X, v.Y)
+	result = min(v.Z, result)
+	result = min(v.W, result)
 	return result
 }
 
 func (v *Vector4) Sum() float32 {
 	var result float32
-	result = v.x + v.y + v.z + v.w
+	result = v.X + v.Y + v.Z + v.W
 	return result
 }
 
 func V4Dot(vec0, vec1 *Vector4) float32 {
-	result := vec0.x * vec1.x
-	result += vec0.y * vec1.y
-	result += vec0.z * vec1.z
-	result += vec0.w * vec1.w
+	result := vec0.X * vec1.X
+	result += vec0.Y * vec1.Y
+	result += vec0.Z * vec1.Z
+	result += vec0.W * vec1.W
 	return result
 }
 
 func (v *Vector4) Dot(vec1 *Vector4) float32 {
-	result := v.x * vec1.x
-	result += v.y * vec1.y
-	result += v.z * vec1.z
-	result += v.w * vec1.w
+	result := v.X * vec1.X
+	result += v.Y * vec1.Y
+	result += v.Z * vec1.Z
+	result += v.W * vec1.W
 	return result
 }
 
 func (v *Vector4) LengthSqr() float32 {
-	result := v.x * v.x
-	result += v.y * v.y
-	result += v.z * v.z
-	result += v.w * v.w
+	result := v.X * v.X
+	result += v.Y * v.Y
+	result += v.Z * v.Z
+	result += v.W * v.W
 	return result
 }
 
@@ -621,54 +592,54 @@ func (v *Vector4) Length() float32 {
 func V4Normalize(result, vec *Vector4) {
 	lenSqr := vec.LengthSqr()
 	lenInv := 1.0 / sqrt(lenSqr)
-	result.x = vec.x * lenInv
-	result.y = vec.y * lenInv
-	result.z = vec.z * lenInv
-	result.w = vec.w * lenInv
+	result.X = vec.X * lenInv
+	result.Y = vec.Y * lenInv
+	result.Z = vec.Z * lenInv
+	result.W = vec.W * lenInv
 }
 
 func V4Select(result, vec0, vec1 *Vector4, select1 int) {
 	if select1 != 0 {
-		result.x = vec1.x
-		result.y = vec1.y
-		result.z = vec1.z
-		result.w = vec1.w
+		result.X = vec1.X
+		result.Y = vec1.Y
+		result.Z = vec1.Z
+		result.W = vec1.W
 	} else {
-		result.x = vec0.x
-		result.y = vec0.y
-		result.z = vec0.z
-		result.w = vec0.w
+		result.X = vec0.X
+		result.Y = vec0.Y
+		result.Z = vec0.Z
+		result.W = vec0.W
 	}
 }
 
 func (v *Vector4) String() string {
-	return fmt.Sprintf("( %f %f %f %f )", v.x, v.y, v.z, v.w)
+	return fmt.Sprintf("( %f %f %f %f )", v.X, v.Y, v.Z, v.W)
 }
 
 /*******/
 
 func P3Copy(result, pnt *Point3) {
-	result.x = pnt.x
-	result.y = pnt.y
-	result.z = pnt.z
+	result.X = pnt.X
+	result.Y = pnt.Y
+	result.Z = pnt.Z
 }
 
 func P3MakeFromElems(result *Point3, x, y, z float32) {
-	result.x = x
-	result.y = y
-	result.z = z
+	result.X = x
+	result.Y = y
+	result.Z = z
 }
 
 func P3MakeFromV3(result *Point3, vec *Vector3) {
-	result.x = vec.x
-	result.y = vec.y
-	result.z = vec.z
+	result.X = vec.X
+	result.Y = vec.Y
+	result.Z = vec.Z
 }
 
 func P3MakeFromScalar(result *Point3, scalar float32) {
-	result.x = scalar
-	result.y = scalar
-	result.z = scalar
+	result.X = scalar
+	result.Y = scalar
+	result.Z = scalar
 }
 
 func P3Lerp(result *Point3, t float32, pnt0, pnt1 *Point3) {
@@ -679,153 +650,141 @@ func P3Lerp(result *Point3, t float32, pnt0, pnt1 *Point3) {
 }
 
 func (p *Point3) SetX(x float32) {
-	p.x = x
-}
-
-func (p *Point3) X() float32 {
-	return p.x
+	p.X = x
 }
 
 func (p *Point3) SetY(y float32) {
-	p.y = y
-}
-
-func (p *Point3) Y() float32 {
-	return p.y
+	p.Y = y
 }
 
 func (p *Point3) SetZ(z float32) {
-	p.z = z
-}
-
-func (p *Point3) Z() float32 {
-	return p.z
+	p.Z = z
 }
 
 func (p *Point3) SetElem(index int, value float32) {
 	switch index {
 	case 0:
-		p.x = value
+		p.X = value
 	case 1:
-		p.y = value
+		p.Y = value
 	case 2:
-		p.z = value
+		p.Z = value
 	}
 }
 
 func (p *Point3) GetElem(index int) float32 {
 	switch index {
 	case 0:
-		return p.x
+		return p.X
 	case 1:
-		return p.y
+		return p.Y
 	case 2:
-		return p.z
+		return p.Z
 	}
 	return 0
 }
 
 func P3Sub(result *Vector3, pnt0, pnt1 *Point3) {
-	result.x = pnt0.x - pnt1.x
-	result.y = pnt0.y - pnt1.y
-	result.z = pnt0.z - pnt1.z
+	result.X = pnt0.X - pnt1.X
+	result.Y = pnt0.Y - pnt1.Y
+	result.Z = pnt0.Z - pnt1.Z
 }
 
 func P3AddV3(result, pnt0 *Point3, vec1 *Vector3) {
-	result.x = pnt0.x + vec1.x
-	result.y = pnt0.y + vec1.y
-	result.z = pnt0.z + vec1.z
+	result.X = pnt0.X + vec1.X
+	result.Y = pnt0.Y + vec1.Y
+	result.Z = pnt0.Z + vec1.Z
 }
 
 func P3SubV3(result, pnt0 *Point3, vec1 *Vector3) {
-	result.x = pnt0.x - vec1.x
-	result.y = pnt0.y - vec1.y
-	result.z = pnt0.z - vec1.z
+	result.X = pnt0.X - vec1.X
+	result.Y = pnt0.Y - vec1.Y
+	result.Z = pnt0.Z - vec1.Z
 }
 
 func P3MulPerElem(result, pnt0, pnt1 *Point3) {
-	result.x = pnt0.x * pnt1.x
-	result.y = pnt0.y * pnt1.y
-	result.z = pnt0.z * pnt1.z
+	result.X = pnt0.X * pnt1.X
+	result.Y = pnt0.Y * pnt1.Y
+	result.Z = pnt0.Z * pnt1.Z
 }
 
 func P3DivPerElem(result, pnt0, pnt1 *Point3) {
-	result.x = pnt0.x / pnt1.x
-	result.y = pnt0.y / pnt1.y
-	result.z = pnt0.z / pnt1.z
+	result.X = pnt0.X / pnt1.X
+	result.Y = pnt0.Y / pnt1.Y
+	result.Z = pnt0.Z / pnt1.Z
 }
 
 func P3RecipPerElem(result, pnt *Point3) {
-	result.x = 1.0 / pnt.x
-	result.y = 1.0 / pnt.y
-	result.z = 1.0 / pnt.z
+	result.X = 1.0 / pnt.X
+	result.Y = 1.0 / pnt.Y
+	result.Z = 1.0 / pnt.Z
 }
 
 func P3SqrtPerElem(result, pnt *Point3) {
-	result.x = sqrt(pnt.x)
-	result.y = sqrt(pnt.y)
-	result.z = sqrt(pnt.z)
+	result.X = sqrt(pnt.X)
+	result.Y = sqrt(pnt.Y)
+	result.Z = sqrt(pnt.Z)
 }
 
 func P3RsqrtPerElem(result, pnt *Point3) {
-	result.x = 1.0 / sqrt(pnt.x)
-	result.y = 1.0 / sqrt(pnt.y)
-	result.z = 1.0 / sqrt(pnt.z)
+	result.X = 1.0 / sqrt(pnt.X)
+	result.Y = 1.0 / sqrt(pnt.Y)
+	result.Z = 1.0 / sqrt(pnt.Z)
 }
 
 func P3AbsPerElem(result, pnt *Point3) {
-	result.x = abs(pnt.x)
-	result.y = abs(pnt.y)
-	result.z = abs(pnt.z)
+	result.X = abs(pnt.X)
+	result.Y = abs(pnt.Y)
+	result.Z = abs(pnt.Z)
 }
 
 func P3CopySignPerElem(result, pnt0, pnt1 *Point3) {
-	if pnt1.x < 0.0 {
-		result.x = -abs(pnt0.x)
+	if pnt1.X < 0.0 {
+		result.X = -abs(pnt0.X)
 	} else {
-		result.x = abs(pnt0.x)
+		result.X = abs(pnt0.X)
 	}
-	if pnt1.y < 0.0 {
-		result.y = -abs(pnt0.y)
+	if pnt1.Y < 0.0 {
+		result.Y = -abs(pnt0.Y)
 	} else {
-		result.y = abs(pnt0.y)
+		result.Y = abs(pnt0.Y)
 	}
-	if pnt1.z < 0.0 {
-		result.z = -abs(pnt0.z)
+	if pnt1.Z < 0.0 {
+		result.Z = -abs(pnt0.Z)
 	} else {
-		result.z = abs(pnt0.z)
+		result.Z = abs(pnt0.Z)
 	}
 }
 
 func P3MaxPerElem(result, pnt0, pnt1 *Point3) {
-	result.x = max(pnt0.x, pnt1.x)
-	result.y = max(pnt0.y, pnt1.y)
-	result.z = max(pnt0.z, pnt1.z)
+	result.X = max(pnt0.X, pnt1.X)
+	result.Y = max(pnt0.Y, pnt1.Y)
+	result.Z = max(pnt0.Z, pnt1.Z)
 }
 
 func (p *Point3) MaxElem() float32 {
 	var result float32
-	result = max(p.x, p.y)
-	result = max(p.z, result)
+	result = max(p.X, p.Y)
+	result = max(p.Z, result)
 	return result
 }
 
 func P3MinPerElem(result, pnt0, pnt1 *Point3) {
-	result.x = min(pnt0.x, pnt1.x)
-	result.y = min(pnt0.y, pnt1.y)
-	result.z = min(pnt0.z, pnt1.z)
+	result.X = min(pnt0.X, pnt1.X)
+	result.Y = min(pnt0.Y, pnt1.Y)
+	result.Z = min(pnt0.Z, pnt1.Z)
 }
 
 func (p *Point3) MinElem() float32 {
 	var result float32
-	result = min(p.x, p.y)
-	result = min(p.z, result)
+	result = min(p.X, p.Y)
+	result = min(p.Z, result)
 	return result
 }
 
 func (p *Point3) Sum() float32 {
 	var result float32
-	result = p.x + p.y + p.z
+	result = p.X + p.Y + p.Z
 	return result
 }
 
@@ -842,9 +801,9 @@ func P3NonUniformScale(result, pnt *Point3, scaleVec *Vector3) {
 }
 
 func (p *Point3) Projection(unitVec *Vector3) float32 {
-	result := p.x * unitVec.x
-	result += p.y * unitVec.y
-	result += p.z * unitVec.z
+	result := p.X * unitVec.X
+	result += p.Y * unitVec.Y
+	result += p.Z * unitVec.Z
 	return result
 }
 
@@ -874,16 +833,16 @@ func (p *Point3) Dist(pnt1 *Point3) float32 {
 
 func P3Select(result, pnt0, pnt1 *Point3, select1 int) {
 	if select1 != 0 {
-		result.x = pnt1.x
-		result.y = pnt1.y
-		result.z = pnt1.z
+		result.X = pnt1.X
+		result.Y = pnt1.Y
+		result.Z = pnt1.Z
 	} else {
-		result.x = pnt0.x
-		result.y = pnt0.y
-		result.z = pnt0.z
+		result.X = pnt0.X
+		result.Y = pnt0.Y
+		result.Z = pnt0.Z
 	}
 }
 
 func (p *Point3) String() string {
-	return fmt.Sprintf("( %f %f %f )", p.x, p.y, p.z)
+	return fmt.Sprintf("( %f %f %f )", p.X, p.Y, p.Z)
 }
