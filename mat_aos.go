@@ -105,9 +105,9 @@ func M3GetCol(result *Vector3, mat *Matrix3, col int) {
 	case 0:
 		V3Copy(result, &mat.col0)
 	case 1:
-		V3Copy(result, &mat.col0)
+		V3Copy(result, &mat.col1)
 	case 2:
-		V3Copy(result, &mat.col0)
+		V3Copy(result, &mat.col2)
 	}
 }
 
