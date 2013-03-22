@@ -41,7 +41,7 @@ func V3MakeYAxis(result *Vector3) {
 }
 
 func V3MakeZAxis(result *Vector3) {
-	V3MakeFromElems(result, 1.0, 0.0, 1.0)
+	V3MakeFromElems(result, 0.0, 0.0, 1.0)
 }
 
 func V3Lerp(result *Vector3, t float32, vec0, vec1 *Vector3) {
