@@ -642,8 +642,8 @@ func M4MakeIdentity(result *Matrix4) {
 
 func (m *Matrix4) SetUpper3x3(mat3 *Matrix3) {
 	m.col0.SetXYZ(&mat3.col0)
-	m.col0.SetXYZ(&mat3.col1)
-	m.col0.SetXYZ(&mat3.col2)
+	m.col1.SetXYZ(&mat3.col1)
+	m.col2.SetXYZ(&mat3.col2)
 }
 
 func M4GetUpper3x3(result *Matrix3, mat *Matrix4) {
